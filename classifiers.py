@@ -21,7 +21,17 @@ class Classifier:
     
     def load(self, path):
         self.model.load_weights(path)
-
+    
+    def get_result(self, x):
+        labels = ["DeepFake", "Real Image"]
+        confidence = model.predict(x)[0]
+        label = []
+        if confidence >= 0.5:
+            label = labels[1]
+        else:
+            label = labels[0]
+        return {"class":label, "confidence":confidence}
+        
 
 class Meso1(Classifier):
     """
